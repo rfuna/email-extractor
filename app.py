@@ -12,25 +12,25 @@ app = FastAPI()
 function_descriptions = [
     {
         "name": "extract_info_from_email",
-        "description": "categorise & extract key info from an email, such as use case, company name, contact details, etc.",
+        "description": "categorise & extract key info from an email, such as the company name, email type etc.",
         "parameters": {
             "type": "object",
             "properties": {
                 "companyName": {
                     "type": "string",
-                    "description": "the name of the company that sent the email"
+                    "description": "The name of the startup that is mentioned in the email"
                 },                                        
                 "product": {
                     "type": "string",
-                    "description": "Try to identify which product the client is interested in, if any"
+                    "description": "Try to identify what the startup company does and what their solution is, if any"
                 },
-                "amount":{
+                "problem": {
                     "type": "string",
-                    "description": "Try to identify the amount of products the client wants to purchase, if any"
+                    "description": "Try to identify the problem the startup is trying to solve, if any"
                 },
                 "category": {
                     "type": "string",
-                    "description": "Try to categorise this email into categories like those: 1. Sales 2. customer support; 3. consulting; 4. partnership; etc."
+                    "description": "Try to categorise this email into 1) Deal flow 2) Networking 3) Portfolio Updates 4) Other.  Deal flow emails are from entrepreneurs and companies pitching their business ideas and seeking funding. Networking emails are from other VCs, investors, advisors, etc. looking to connect, share deals, syndicate investments, etc. Portfolio Update emails from portfolio companies providing business updates, milestones, asking for advice, etc. Other emails are those that are not Deal flow, networking, or portfolio updates."
                 },
                 "nextStep":{
                     "type": "string",
@@ -38,10 +38,14 @@ function_descriptions = [
                 },
                 "priority": {
                     "type": "string",
-                    "description": "Try to give a priority score to this email based on how likely this email will leads to a good business opportunity, from 0 to 10; 10 most important"
+                    "description": "Try to give a priority score to this email based on how likely this email will leads to a good investment opportunity, from 0 to 10; 10 most important"
+                },
+                "urgency": {
+                    "type": "string",
+                    "description": "Try to give a urgency score to this email based on how urgently and time-sensitive this email should be responded to, from 0 to 10; 10 most important"
                 },
             },
-            "required": ["companyName", "amount", "product", "priority", "category", "nextStep"]
+            "required": ["companyName", "amount", "product", "priority", "category", "nextStep", "urgency"]
         }
     }
 ]
@@ -110,15 +114,17 @@ def analyse_email(email: Email):
     companyName = eval(arguments).get("companyName")
     priority = eval(arguments).get("priority")
     product = eval(arguments).get("product")
-    amount = eval(arguments).get("amount")
+    problem = eval(arguments).get("problem")
     category = eval(arguments).get("category")
     nextStep = eval(arguments).get("nextStep")
+    urgency = eval(arguments).get("urgency")
 
     return {
         "companyName": companyName,
         "product": product,
-        "amount": amount,
+        "problem": problem,
         "priority": priority,
         "category": category,
-        "nextStep": nextStep
+        "nextStep": nextStep,
+        "urgency": urgency
     }
