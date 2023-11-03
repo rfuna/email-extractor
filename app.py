@@ -42,7 +42,7 @@ function_descriptions = [
                 },
                 "urgency": {
                     "type": "string",
-                    "description": "Try to give a urgency score to this email based on how urgently and time-sensitive this email should be responded to, from 0 to 10; 10 most important"
+                    "description": "Try to give a urgency score to this email based on time-sensitivity urgency for responding to this email, from 0 to 10; 10 most important"
                 },
             },
             "required": ["companyName", "problem", "product", "priority", "category", "nextStep", "urgency"]
