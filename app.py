@@ -18,11 +18,11 @@ function_descriptions = [
             "properties": {
                 "companyName": {
                     "type": "string",
-                    "description": "The name of the startup that is mentioned in the email"
+                    "description": "The name of the startup that is mentioned in the email."
                 },                                        
                 "product": {
                     "type": "string",
-                    "description": "Try to identify what the startup company does and what their solution is, if any"
+                    "description": "Try to identify what the startup company does and what their solution is, if any."
                 },
                 "problem": {
                     "type": "string",
@@ -45,7 +45,7 @@ function_descriptions = [
                     "description": "Try to give a urgency score to this email based on how urgently and time-sensitive this email should be responded to, from 0 to 10; 10 most important"
                 },
             },
-            "required": ["companyName", "amount", "product", "priority", "category", "nextStep", "urgency"]
+            "required": ["companyName", "problem", "product", "priority", "category", "nextStep", "urgency"]
         }
     }
 ]
